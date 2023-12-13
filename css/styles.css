@@ -161,6 +161,10 @@ h3 {
     font-size: 18px;
 }
 
+.contenedor-grid{
+    display: none;
+}
+
 .news-image {
     max-width: 100%;
     height: auto;
@@ -349,6 +353,7 @@ h1 {
         justify-content: space-around;
         padding: 0;
         width: 100%;
+        
     }
 
     .menu ul li {
@@ -363,6 +368,10 @@ h1 {
         color: #333;
         font-size: 20px;
         font-weight: 200;
+    }
+
+    .menu ul li a:hover{
+        text-shadow: 1px 1px 2px rgba(169, 102, 21, 0.3);
     }
 
     .close-btn {
@@ -380,6 +389,7 @@ h1 {
     .news-section{
         display: flex;
         flex-direction: row;
+        justify-content: space-around;
         margin: 0;
         width: 100%;
     }
@@ -394,36 +404,54 @@ h1 {
     .articles{
         margin: 8%;
         width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
     }
 
     .news-article {
+        width: 100%;
+        margin-bottom: 10%;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-        width: 100%;
-        margin-bottom: 10%;
     }
 
     .news-article h3{
-        position: absolute;
-        left: 10%;
-        
+        padding-left: 12%;
+        width: 50%;
+        height: 20%;
     }
 
     .news-article p{
         padding: 5%;    
-        position: relative;
-        left: -2.5%;
-
+        width: 70%;
+        height: auto;
     }
 
-    .news-image{
+    .contenedor-grid {
+        display: grid;
+        grid-template-columns: 1fr; 
+        gap: 10px; /* Espacio entre las columnas */
         width: 25%;
+        height: 10%;
+        padding: 5%;
+    }
+    
+    .imagenes-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Dos columnas para las imágenes */
+        gap: 10px; /* Espacio entre las imágenes */
+        border: solid red 2px;
+    }
+    
+    .imagenes-grid img {
+        width: 100%; /* Para que las imágenes ocupen el 100% del contenedor */
+        height: auto; /* Para mantener la proporción original de la imagen */
+        border-radius: 25px;
+        padding: 2%;    
     }
 
+    .imagenes-grid img:hover{
+        transform: scale(1.1); /* Estilo de zoom al pasar por encima */
+    }
 
 
     /*footer*/
