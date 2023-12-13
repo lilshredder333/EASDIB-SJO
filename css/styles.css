@@ -144,7 +144,7 @@ h1 {
 /*main index*/
 
 .news-section {
-    width: 90%;
+    width: 85%;
     margin: auto;
     margin-bottom: 1rem;
 }
@@ -152,7 +152,6 @@ h1 {
 .articles {
     display: flex;
     flex-direction: column;
-    margin-top: 1rem;
 }
 
 h2 {
@@ -160,14 +159,21 @@ h2 {
 }
 
 .news-article {
-    margin-bottom: 1rem;
+    margin-top: 3rem;
 }
 
-h3 {
-    font-size: 18px;
+.news-article h3 {
+    font-size: 25px;
+    padding-bottom: 1rem;
+
 }
 
-.contenedor-grid{
+.news-article p {
+    padding-bottom: 1rem;
+    
+}
+
+.contenedor-grid {
     display: none;
 }
 
@@ -226,7 +232,7 @@ footer {
     margin-top: 1rem;
 }
 
-.footer-info p{
+.footer-info p {
     padding: 5%;
 }
 
@@ -289,37 +295,37 @@ footer {
 
     /*header...*/
 
-.header {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-    width: 90%;
-    margin: auto;
-    padding-top: 1.5rem;
+    .header {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+        margin: auto;
+        padding-top: 1.5rem;
 
-}
+    }
 
-.header-left {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-}
+    .header-left {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+    }
 
-.logo {
-    width: 60px;
-    height: 60px;
-}
+    .logo {
+        width: 60px;
+        height: 60px;
+    }
 
-h1 {
-    font-size: 16px;
-    font-weight: normal;
-    color: #333;
-}
+    h1 {
+        font-size: 16px;
+        font-weight: normal;
+        color: #333;
+    }
 
     /*Barra navegación*/
 
@@ -327,7 +333,7 @@ h1 {
         display: none;
     }
 
-    .close-btn{
+    .close-btn {
         display: none;
     }
 
@@ -339,7 +345,7 @@ h1 {
         left: 50%;
         top: 0;
         background-color: transparent;
-      
+
     }
 
     .menu {
@@ -349,7 +355,7 @@ h1 {
         height: 12rem;
         position: absolute;
         right: 0;
-        top:0;
+        top: 0;
         padding: 0;
     }
 
@@ -359,7 +365,7 @@ h1 {
         justify-content: space-around;
         padding: 0;
         width: 100%;
-        
+
     }
 
     .menu ul li {
@@ -376,8 +382,9 @@ h1 {
         font-weight: 200;
     }
 
-    .menu ul li a:hover{
-        text-shadow: 1px 1px 2px rgba(169, 102, 21, 0.3);
+    .menu ul li a:hover {
+        text-shadow: 1px 1px 2px rgb(0, 0, 0);
+        color: whitesmoke;
     }
 
     .close-btn {
@@ -392,7 +399,7 @@ h1 {
 
     /*main index*/
 
-    .news-section{
+    .news-section {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
@@ -400,14 +407,14 @@ h1 {
         width: 100%;
     }
 
-    .news-section h2{
+    .news-section h2 {
         position: absolute;
         left: 10%;
     }
 
-    
 
-    .articles{
+
+    .articles {
         margin: 8%;
         width: 100%;
     }
@@ -420,45 +427,56 @@ h1 {
         justify-content: space-around;
     }
 
-    .news-article h3{
+    .news-article h3 {
         position: absolute;
         left: 12%;
     }
 
-    .news-article p{
+    .news-article p {
         padding: 5%;
-        width: 150%;
-        height: auto;
+        
     }
 
-    .news-article img{
+    .news-image{
+        display: none;
+    }
+
+    .news-article img {
         width: 100%;
     }
 
     .contenedor-grid {
         display: grid;
-        grid-template-columns: 1fr; 
-        gap: 10px; /* Espacio entre las columnas */
+        grid-template-columns: 1fr;
+        gap: 10px;
+        /* Espacio entre las columnas */
         width: 100%;
-        height: 10%;
+        
         padding: 5%;
     }
-    
+
     .imagenes-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Dos columnas para las imágenes */
-        gap: 10px; /* Espacio entre las imágenes */
-    }
-    
-    .imagenes-grid img {
-        width: 100%; /* Para que las imágenes ocupen el 100% del contenedor */
-        height: auto; /* Para mantener la proporción original de la imagen */
-        border-radius: 25px;
-        padding: 2%;    
+        grid-template-columns: repeat(2, 1fr);
+        /* Dos columnas para las imágenes */
+        gap: 10px;
+        /* Espacio entre las imágenes */
+        width: 450px;
+       
     }
 
-    .imagenes-grid img:hover{
-        transform: scale(1.1); /* Estilo de zoom al pasar por encima */
+    .imagenes-grid img {
+        width: 100%;
+        /* Para que las imágenes ocupen el 100% del contenedor */
+        height: auto;
+        /* Para mantener la proporción original de la imagen */
+        border-radius: 25px;
+        padding: 2%;
+    }
+
+    .imagenes-grid img:hover {
+        transform: scale(1.1);
+        /* Estilo de zoom al pasar por encima */
         border: solid 1px #333;
     }
 
