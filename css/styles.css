@@ -394,7 +394,7 @@ footer {
 
     .menu ul li a:hover::after {
         width: 100%;
-        //transition: width .3s;
+        transition: width .3s;
     }
 
    
@@ -477,8 +477,6 @@ footer {
         /* Espacio entre las imágenes */
         width: 450px;
         border-radius: 25px;
-
-
     }
 
     .imagenes-grid img {
