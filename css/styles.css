@@ -16,7 +16,7 @@
 
 @font-face {
     font-family: 'AccentFont';
-    src: url('FONT/PPEditorialNew-Regular.otf') format('truetype');
+    src: url('FONT/SUNFLOWER/Sunflower.otf') format('truetype');
     /* vinculacion de nuestra fuente de acento */
 }
 
@@ -170,7 +170,7 @@ h2 {
 
 .news-article p {
     padding-bottom: 1rem;
-    
+
 }
 
 .contenedor-grid {
@@ -375,6 +375,13 @@ footer {
 
     }
 
+    /*  .menu ul li a{
+        text-decoration: none;
+        color: #333;
+        font-size: 20px;
+        font-weight: 200;
+    } */
+
     .menu ul li a {
         text-decoration: none;
         color: #333;
@@ -382,10 +389,24 @@ footer {
         font-weight: 200;
     }
 
-    .menu ul li a:hover {
-        text-shadow: 1px 1px 2px rgb(0, 0, 0);
-        color: whitesmoke;
+    .menu ul li a::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 2px;
+        background: #000;
+        transition: width .3s;
+
     }
+
+    .menu ul li a:hover::after {
+        width: 100%;
+        //transition: width .3s;
+    }
+
+   
+
+
 
     .close-btn {
         position: absolute;
@@ -434,10 +455,10 @@ footer {
 
     .news-article p {
         padding: 5%;
-        
+
     }
 
-    .news-image{
+    .news-image {
         display: none;
     }
 
@@ -451,7 +472,7 @@ footer {
         gap: 10px;
         /* Espacio entre las columnas */
         width: 100%;
-        
+
         padding: 5%;
     }
 
@@ -459,10 +480,12 @@ footer {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         /* Dos columnas para las imágenes */
-        gap: 10px;
+        gap: 20px;
         /* Espacio entre las imágenes */
         width: 450px;
-       
+        border-radius: 25px;
+
+
     }
 
     .imagenes-grid img {
@@ -470,14 +493,40 @@ footer {
         /* Para que las imágenes ocupen el 100% del contenedor */
         height: auto;
         /* Para mantener la proporción original de la imagen */
-        border-radius: 25px;
+
         padding: 2%;
+
+        --g: 2px;
+        /* the gap */
+        --b: 2px;
+        /* border thickness*/
+        --c: #333;
+        /* the color */
+
+
+        padding: calc(var(--g) + var(--b));
+        --_c: #0000 0 25%, var(--c) 0 50%;
+        --_g1: repeating-linear-gradient(90deg, var(--_c)) repeat-x;
+        --_g2: repeating-linear-gradient(180deg, var(--_c)) repeat-y;
+        background:
+            var(--_g1) var(--_p, 25%) 0, var(--_g2) 0 var(--_p, 125%),
+            var(--_g1) var(--_p, 125%) 100%, var(--_g2) 100% var(--_p, 25%);
+        background-size: 200% var(--b), var(--b) 200%;
+        cursor: pointer;
+        transition: .3s;
+        border-radius: 25px;
     }
 
+
+
+
     .imagenes-grid img:hover {
-        transform: scale(1.1);
+
         /* Estilo de zoom al pasar por encima */
-        border: solid 1px #333;
+        /*         border: solid 1px #333; */
+        --_p: 75%;
+        transform: scale(1.1);
+
     }
 
 
