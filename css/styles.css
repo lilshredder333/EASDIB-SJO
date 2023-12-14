@@ -62,10 +62,11 @@ body {
     height: 60px;
 }
 
-h1 {
+header h1 {
     font-size: 16px;
     font-weight: normal;
     color: #333;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 /*Barra navegación*/
@@ -321,11 +322,30 @@ footer {
         height: 60px;
     }
 
-    h1 {
-        font-size: 16px;
+    header h1 {
+        font-size: 18px;
         font-weight: normal;
         color: #333;
     }
+
+    header h1::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 2px;
+        background: #000;
+        transition: width .3s;
+
+    }
+
+    header h1:hover::after {
+        width: 100%;
+        transition: width .3s;
+    }
+
+
+
+    
 
     /*Barra navegación*/
 
@@ -378,8 +398,9 @@ footer {
     .menu ul li a {
         text-decoration: none;
         color: #333;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 200;
+        font-family: 'Roboto Condensed', sans-serif;
     }
 
     .menu ul li a::after {
@@ -424,6 +445,7 @@ footer {
     .news-section h2 {
         position: absolute;
         left: 10%;
+        font-size: 25px;
     }
 
 
@@ -462,10 +484,9 @@ footer {
     .contenedor-grid {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 10px;
+        gap: 5px;
         /* Espacio entre las columnas */
-        width: 100%;
-
+        width: 100%;    
         padding: 5%;
     }
 
@@ -516,7 +537,9 @@ footer {
         /* Estilo de zoom al pasar por encima */
         /*         border: solid 1px #333; */
         --_p: 75%;
-        transform: scale(1.1);
+        transform: scale(1.2);
+        border-radius: 0;
+
 
     }
 
@@ -584,6 +607,11 @@ footer {
         border-radius: 20px;
         background-color: var(--green-color);
         margin: 100px;
+    }
+
+    .adopcion_boton:hover{
+        scale: 1.05;
+        transition: 0.5s all ease-in-out;
     }
 
     .proceso_adopcion {
