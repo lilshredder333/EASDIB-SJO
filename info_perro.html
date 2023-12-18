@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Aada</title>
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.6.0/stitch.js"></script>
+    </head>
+    <script>
+        var account = "aadast1";
+        var fileShare = "images";
+
+        var sas = "?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2024-12-01T07:41:50Z&st=2023-12-01T23:41:50Z&spr=https&sig=lFjNHh%2BIUsSK7qGl%2B3iWynbaV5PhqzSGtqVfyaO07m0%3D"
+        // Get query string parameters value
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+        // Initialize the App Client
+        const client = stitch.Stitch.initializeDefaultAppClient("samplesjomusic4-pxexz");
+        // Get a MongoDB Service Client
+        const mongodb = client.getServiceClient(
+            stitch.RemoteMongoClient.factory,
+            "mongodb-atlas"
+        );
+
+        // Get a reference to the music database
+        const db = mongodb.db("easdib");
+        // Function display leagues
+        function displayanimals(parameterId) {
+            db.collection("pets")
+                .find({_id: { $eq: new stitch.BSON.ObjectId(parameterId)}})
+                .toArray()
+                .then(docs => {
+                    var fechacompleta = docs[0].fecha;
+                    var fecha = new Date(fechacompleta);
+
+                    var dia = fecha.getDate();
+                    var mes = fecha.getMonth() + 1; // Se agrega 1 porque los meses van de 0 a 11 en JavaScript
+                    var año = fecha.getFullYear();
+
+                    // Asegurarse de que el día, mes y año tengan el formato adecuado (dos dígitos para día y mes)
+                    var diaFormateado = dia < 10 ? '0' + dia : dia;
+                    var mesFormateado = mes < 10 ? '0' + mes : mes;
+
+                    var fechaformateada = diaFormateado + '-' + mesFormateado + '-' + año;
+
+
+                    var result = `<div class="nombre_animal">
+                                            <h1>${docs[0].nombre}</h1>
+                                            <img src="img/logo.png" alt="sexo" class="sexo">
+                                        </div>
+
+                                        <div id="slider" class="slider">
+                                            <div id="slides" class="slides">
+                                                
+                                            </div>
+                                            <div id="navigation-manual" class="navigation-manual">
+
+                                            </div>
+                                        </div>
+                                        <div class="descripcion_animal">
+                                            <p>${docs[0].descripcion}</p>
+                                        </div>
+                                        <div class="detalles">
+                                            <div class="detalles_izq">
+                                                <ul>
+                                                    <li>EDAD: ${docs[0].edad}</li>
+                                                    <li>TAMAÑO: ${docs[0].tamaño}</li>
+                                                    <li>RAZA: ${docs[0].raza}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="detalles_dcha">
+                                                <ul>
+                                                    <li>Nº COLLAR: ${docs[0].collar}</li>
+                                                    <li>DIA DE LLEGADA: `+ fechaformateada +`</li>
+                                                    <li>PELAJE: ${docs[0].pelo}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <a href="contacto.html">
+                                            <div class="boton_conoceme">
+                                                <p>CONÓCEME</p>
+                                            </div>
+                                        </a>`;
+                    document.getElementById('main').innerHTML = result;
+
+                    // creacion radio buttons
+                    var radiobtn = "";
+                    for(let i = 0; i < docs[0].images.length; i++){
+                        var result = `<input type="radio" name="radio-btn" id="radio${i}">`;
+                        radiobtn = radiobtn + result;
+                    }
+
+                    // creacion contenedor imagenes
+                    var slide = "";
+                    var result = "";
+                    for (let i = 0; i < docs[0].images.length; i++) {
+                        if(i == 0){
+                            result = `<div class="slide first"><img src="https://` + account + `.file.core.windows.net/` + fileShare + `/` + docs[i].images[i].name + sas + `&xyz=` + new Date().getTime().toString() + ` "></div>`;
+                        } else {
+                            result = `<div class="slide"><img src="https://` + account + `.file.core.windows.net/` + fileShare + `/` + docs[0].images[i].name + sas + `&xyz=` + new Date().getTime().toString() + ` "></div>`;
+                        }
+                        slide = slide + result;
+                    }
+
+                    document.getElementById('slides').innerHTML = radiobtn + slide;
+
+                    // creacion label
+                    var html = "";
+                    for(let i = 0; i < docs[0].images.length; i++){
+                        var result = `<label for="radio`+i+`" class="manual-btn"></label>`;
+                        var html = html + result;
+                    }
+                    document.getElementById('navigation-manual').innerHTML = html;
+                });
+        }
+
+        // Function execute on load
+        function displayOnLoad() {
+            client.auth
+                .loginWithCredential(new stitch.AnonymousCredential())
+                .then(displayanimals(getParameterByName('id')))
+                .catch(console.error);
+        }
+    </script>
+
+    <body onload="displayOnLoad()">
+        <header class="header_fondo">
+            <div class="header">
+                <a href="index.html">
+                    <div class="header-left">
+                        <img class="logo" src="img/logo.png" alt="logo">
+                        <h1>Asociación de Animales<br> Domésticos en Adopción</h1>
+                    </div>
+                </a>
+                <div class="menu-btn" onclick="toggleMenu()">&#9776;</div>
+                <div class="overlay" id="overlay">
+                    <div class="menu">
+                        <span class="close-btn" onclick="toggleMenu()">&times;</span>
+                        <ul>
+                            <li><a href="adopcion.html">Adopción</a></li>
+                            <li><a href="contacto.html">Contacto</a></li>
+                            <li><a href="colabora.html">Colabora</a></li>
+                            <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main id="main" class="info_perro">
+            
+        </main>
+
+        <footer>
+            <div class="footer_content">
+                <div class="footer-top">
+                    <div id="footer-left">
+                        <img src="img/logo.png" id="logo-footer" alt="logo">
+                        <p>Asociación de Animales <br> Domésticos en Adopción</p>
+                    </div>
+                    <div class="footer-info">
+                        <p>Dirección</p>
+                        <p>Mail</p>
+                        <p>Telf</p>
+                    </div>
+                </div>
+                <div class="footer-lower">
+                    <p>Copyright©️ 2023. All Rights Reserved</p>
+                </div>
+            </div>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Aada</title>
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.6.0/stitch.js"></script>
+    </head>
+    <script>
+        var account = "aadast1";
+        var fileShare = "images";
+
+        var sas = "?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2024-12-01T07:41:50Z&st=2023-12-01T23:41:50Z&spr=https&sig=lFjNHh%2BIUsSK7qGl%2B3iWynbaV5PhqzSGtqVfyaO07m0%3D"
+        // Get query string parameters value
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+        // Initialize the App Client
+        const client = stitch.Stitch.initializeDefaultAppClient("samplesjomusic4-pxexz");
+        // Get a MongoDB Service Client
+        const mongodb = client.getServiceClient(
+            stitch.RemoteMongoClient.factory,
+            "mongodb-atlas"
+        );
+
+        // Get a reference to the music database
+        const db = mongodb.db("easdib");
+        // Function display leagues
+        function displayanimals(filter) {
+            db.collection("pets")
+                .find({animal: { $eq: filter }})
+                .toArray()
+                .then(docs => {
+                    var html = "";
+                    for(let i = 0; i < docs.length; i++) {
+                        var result = `<a href="info_perro.html?id=${docs[i]._id}">
+                                            <div class="perros_boton">
+                                                <img src="https://` + account + `.file.core.windows.net/` + fileShare + `/` + docs[i].images[0].name + sas + `&xyz=` + new Date().getTime().toString() + ` " alt="perro" class="foto_perro">
+                                                <div class="perros_content">
+                                                    <div class="perros-info">
+                                                        <h3>NOMBRE: ${docs[i].nombre}</h3>
+                                                        <p>EDAD: ${docs[i].edad}</p>
+                                                        <p>TAMAÑO: ${docs[i].tamaño}</p>
+                                                    </div>
+                                                    <img src="img/logo.png" class="sexo">
+                                                </div>
+                                            </div>
+                                        </a>`;
+                        var html = html + result;
+                    }
+                    document.getElementById('perros').innerHTML = html;
+                   
+                });
+        }
+
+        // Function execute on load
+        function displayOnLoad() {
+            client.auth
+                .loginWithCredential(new stitch.AnonymousCredential())
+                .then(displayanimals(getParameterByName('animal')))
+                .catch(console.error);
+        }
+    </script>
+
+    <body onload="displayOnLoad()">
+        <header class="header_fondo">
+            <div class="header">
+                <a href="index.html">
+                    <div class="header-left">
+                        <img class="logo" src="img/logo.png" alt="logo">
+                        <h1>Asociación de Animales<br> Domésticos en Adopción</h1>
+                    </div>
+                </a>
+                <div class="menu-btn" onclick="toggleMenu()">&#9776;</div>
+                <div class="overlay" id="overlay">
+                    <div class="menu">
+                        <span class="close-btn" onclick="toggleMenu()">&times;</span>
+                        <ul>
+                            <li><a href="adopcion.html">Adopción</a></li>
+                            <li><a href="contacto.html">Contacto</a></li>
+                            <li><a href="colabora.html">Colabora</a></li>
+                            <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main id="perros">
+            <div class="intro_adopcion">
+                <h2>ADOPTA TU GATO</h2>
+                <div class="filtro">
+                    <p>FILTRO</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer_content">
+                <div class="footer-top">
+                    <div id="footer-left">
+                        <img src="img/logo.png" id="logo-footer" alt="logo">
+                        <p>Asociación de Animales <br> Domésticos en Adopción</p>
+                    </div>
+                    <div class="footer-info">
+                        <p>Dirección</p>
+                        <p>Mail</p>
+                        <p>Telf</p>
+                    </div>
+                </div>
+                <div class="footer-lower">
+                    <p>Copyright©️ 2023. All Rights Reserved</p>
+                </div>
+            </div>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+</html>
